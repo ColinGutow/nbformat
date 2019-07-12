@@ -15,6 +15,7 @@ from . import v1
 from . import v2
 from . import v3
 from . import v4
+from . import v5
 from .sentinel import Sentinel
 
 __all__ = ['versions', 'validate', 'ValidationError', 'convert', 'from_dict',
@@ -28,6 +29,7 @@ versions = {
     2: v2,
     3: v3,
     4: v4,
+    5: v5,
 }
 
 from .validator import validate, ValidationError
@@ -35,7 +37,7 @@ from .converter import convert
 from . import reader
 from .notebooknode import from_dict, NotebookNode
 
-from .v4 import (
+from .v5 import (
     nbformat as current_nbformat,
     nbformat_minor as current_nbformat_minor,
 )

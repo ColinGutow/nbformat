@@ -11,7 +11,7 @@ from .nbbase import (
     NotebookNode,
 )
 
-from nbformat import v3
+from nbformat import v4
 from traitlets.log import get_logger
 
 def _warn_if_invalid(nb, version):
@@ -22,7 +22,7 @@ def _warn_if_invalid(nb, version):
     except ValidationError as e:
         get_logger().error("Notebook JSON is not valid v%i: %s", version, e)
 
-def upgrade(nb, from_version=3, from_minor=0):
+def upgrade(nb, from_version=4, from_minor=0):
     """Convert a notebook to v4.
 
     Parameters
@@ -34,7 +34,7 @@ def upgrade(nb, from_version=3, from_minor=0):
     from_minor : int
         The original minor version of the notebook to convert (only relevant for v >= 3).
     """
-    if from_version == 3:
+    if from_version == 4:
         # Validate the notebook before conversion
         _warn_if_invalid(nb, from_version)
 
@@ -62,7 +62,7 @@ def upgrade(nb, from_version=3, from_minor=0):
         # Validate the converted notebook before returning it
         _warn_if_invalid(nb, nbformat)
         return nb
-    elif from_version == 4:
+    elif from_version == 5:
         # nothing to do
         if from_minor != nbformat_minor:
             nb.metadata.orig_nbformat_minor = from_minor
@@ -229,7 +229,7 @@ def downgrade_outputs(outputs):
     return [downgrade_output(op) for op in outputs]
 
 def downgrade(nb):
-    """Convert a v4 notebook to v3.
+    """Convert a v5 notebook to v4.
 
     Parameters
     ----------
@@ -242,10 +242,10 @@ def downgrade(nb):
     # Validate the notebook before conversion
     _warn_if_invalid(nb, nbformat)
 
-    nb.nbformat = v3.nbformat
-    nb.nbformat_minor = v3.nbformat_minor
+    nb.nbformat = v4.nbformat
+    nb.nbformat_minor = v4.nbformat_minor
     cells = [ downgrade_cell(cell) for cell in nb.pop('cells') ]
-    nb.worksheets = [v3.new_worksheet(cells=cells)]
+    nb.worksheets = [v4.new_worksheet(cells=cells)]
     nb.metadata.setdefault('name', '')
 
     # Validate the converted notebook before returning it
