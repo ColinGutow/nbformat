@@ -13,13 +13,15 @@ from ..notebooknode import NotebookNode
 
 # Change this when incrementing the nbformat version
 nbformat = 5
-nbformat_minor = 2
+nbformat_minor = 0
 nbformat_schema = 'nbformat.v5.schema.json'
 
 
 def validate(node, ref=None):
     """validate a v5 node"""
     from .. import validate
+    print('About to validate with format ='+str(nbformat))
+    print('Node: '+str(node))
     return validate(node, ref=ref, version=nbformat)
 
 
@@ -153,6 +155,8 @@ def new_notebook(**kwargs):
         metadata=NotebookNode(),
         cells=[],
     )
+    print('Created new notebook: '+str(nb))
     nb.update(kwargs)
     validate(nb)
+    print('Exiting new_notebook()')
     return nb

@@ -46,6 +46,7 @@ package_data = {
         'tests/*.ipynb',
         'v3/nbformat.v3.schema.json',
         'v4/nbformat.v4.schema.json',
+        'v5/nbformat.v5.schema.json',
     ],
 }
 

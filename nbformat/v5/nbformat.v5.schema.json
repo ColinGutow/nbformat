@@ -1,6 +1,6 @@
 {
     "$schema": "http://json-schema.org/draft-04/schema#",
-    "description": "Jupyter Notebook v4.2 JSON schema.",
+    "description": "Jupyter Notebook v5.0 JSON schema.",
     "type": "object",
     "additionalProperties": false,
     "required": ["metadata", "nbformat_minor", "nbformat", "cells"],
@@ -88,7 +88,7 @@
             "description": "Notebook format (major number). Incremented between backwards incompatible changes to the notebook format.",
             "type": "integer",
             "minimum": 4,
-            "maximum": 4
+            "maximum": 5
         },
         "cells": {
             "description": "Array of cells of the current notebook.",
@@ -178,7 +178,17 @@
                     }
                 },
                 "attachments": {"$ref": "#/definitions/misc/attachments"},
-                "source": {"$ref": "#/definitions/misc/source"}
+                "source": {
+                    "description": "Quill Delta expression",
+                    "type":"object",
+                    "properties":{
+                        "ops":{
+                            "description":"List of Delta operations",
+                            "type":"array",
+                            "items":{"type":"object"}
+                        }
+                    }
+                }
             }
         },
 

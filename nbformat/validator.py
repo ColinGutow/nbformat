@@ -245,6 +245,8 @@ def validate(nbdict=None, ref=None, version=None, version_minor=None,
     """
 
     # backwards compatibility for nbjson argument
+    print('entering validator.py validator with nbdict='+str(nbdict))
+    print('version = '+str(version))
     if nbdict is not None:
         pass
     elif nbjson is not None:
@@ -254,6 +256,7 @@ def validate(nbdict=None, ref=None, version=None, version_minor=None,
 
     if version is None:
         version, version_minor = get_version(nbdict)
+        print('looked up version and got: '+str(version)+'.'+str(version_minor))
 
     for error in iter_validate(nbdict, ref=ref, version=version,
                                version_minor=version_minor,
@@ -293,3 +296,4 @@ def iter_validate(nbdict=None, ref=None, version=None, version_minor=None,
 
     for error in errors:
         yield better_validation_error(error, version, version_minor)
+    print('reached end of iter_validate.')
