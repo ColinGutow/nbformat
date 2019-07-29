@@ -244,9 +244,11 @@ def validate(nbdict=None, ref=None, version=None, version_minor=None,
     Raises ValidationError if not valid.
     """
 
-    # backwards compatibility for nbjson argument
-    print('entering validator.py validator with nbdict='+str(nbdict))
+    print('entering validator.py validator')
+    #print('json = '+str(nbdict)) # Uncomment only if you need to debug json.
+    							 # Very noisy for all but shortest notebooks.
     print('version = '+str(version))
+    # backwards compatibility for nbjson argument
     if nbdict is not None:
         pass
     elif nbjson is not None:
@@ -256,7 +258,7 @@ def validate(nbdict=None, ref=None, version=None, version_minor=None,
 
     if version is None:
         version, version_minor = get_version(nbdict)
-        print('looked up version and got: '+str(version)+'.'+str(version_minor))
+        print('Looked up version and got: '+str(version)+'.'+str(version_minor))
 
     for error in iter_validate(nbdict, ref=ref, version=version,
                                version_minor=version_minor,
