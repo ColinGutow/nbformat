@@ -243,11 +243,11 @@ def validate(nbdict=None, ref=None, version=None, version_minor=None,
 
     Raises ValidationError if not valid.
     """
-
-    print('entering validator.py validator')
+    #Uncomment below to see what happens when a notebook is validated
+    #print('entering validator.py validator')
     #print('json = '+str(nbdict)) # Uncomment only if you need to debug json.
     							 # Very noisy for all but shortest notebooks.
-    print('version = '+str(version))
+    #print('version = '+str(version))
     # backwards compatibility for nbjson argument
     if nbdict is not None:
         pass
@@ -258,7 +258,8 @@ def validate(nbdict=None, ref=None, version=None, version_minor=None,
 
     if version is None:
         version, version_minor = get_version(nbdict)
-        print('Looked up version and got: '+str(version)+'.'+str(version_minor))
+        #Uncomment below to see what happens when a notebook is validated
+        #print('Looked up version and got: '+str(version)+'.'+str(version_minor))
 
     for error in iter_validate(nbdict, ref=ref, version=version,
                                version_minor=version_minor,
@@ -298,4 +299,5 @@ def iter_validate(nbdict=None, ref=None, version=None, version_minor=None,
 
     for error in errors:
         yield better_validation_error(error, version, version_minor)
-    print('reached end of iter_validate.')
+    #Uncomment below to see what happens when a notebook is validated
+    #print('reached end of iter_validate.')
