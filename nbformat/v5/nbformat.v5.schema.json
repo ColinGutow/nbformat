@@ -178,18 +178,8 @@
                     }
                 },
                 "attachments": {"$ref": "#/definitions/misc/attachments"},
-                "source": {
-                    "description": "Quill Delta expression",
-                    "type":"object",
-                    "properties":{
-                        "ops":{
-                            "description":"List of Delta operations",
-                            "type":"array",
-                            "items":{"type":"object"}
-                        }
-                    }
-                }
-            }
+                "source": {"$ref": "#/definitions/misc/source"}
+           }
         },
 
         "markdown_cell": {

@@ -1,4 +1,4 @@
-"""Code for converting notebooks to and from v3."""
+"""Code for converting notebooks to and from v5."""
 
 # Copyright (c) IPython Development Team.
 # Distributed under the terms of the Modified BSD License.
@@ -76,12 +76,11 @@ def upgrade_cell(cell):
 def downgrade_cell(cell):
     """downgrade a cell from v5 to v4
 
-    WYSIWYG -> markdown would be ideal, but
-               will initially convert to raw text.
+    WYSIWYG -> markdown, since markdown also handles html.
     """
     print('entering convert.py downgrade_cell()')
     if cell.cell_type == 'WYSIWYG':
-        cell.cell_type = 'raw'
+        cell.cell_type = 'markdown'
         cell.source = text
     return cell
 
